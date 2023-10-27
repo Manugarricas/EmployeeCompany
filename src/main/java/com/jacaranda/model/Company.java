@@ -20,7 +20,7 @@ public class Company {
 	private List<Employee> EmployeeList;
 	
 	@OneToMany(mappedBy="company")
-	private List<CompanyProyect> companyProyect;
+	private List<CompanyProject> companyProject;
 
 	public Company(int id, String name, String address, String city) {
 		super();

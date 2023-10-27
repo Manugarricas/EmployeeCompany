@@ -9,16 +9,16 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="proyect")
-public class Proyect {
+@Table(name="project")
+public class Project {
 	
 	@Id
 	private int id;
 	private String name;
 	private String budget;
 	
-	@OneToMany(mappedBy="proyect")
-	List<CompanyProyect> companyProyect;
+	@OneToMany(mappedBy="project")
+	List<CompanyProject> companyProject;
 	
 	public int getId() {
 		return id;
@@ -39,11 +39,11 @@ public class Proyect {
 		this.budget = budget;
 	}
 	
-	public List<CompanyProyect> getCompanyProyect() {
-		return companyProyect;
+	public List<CompanyProject> getCompanyProject() {
+		return companyProject;
 	}
-	public void setCompanyProyect(List<CompanyProyect> companyProyect) {
-		this.companyProyect = companyProyect;
+	public void setCompanyProject(List<CompanyProject> companyProject) {
+		this.companyProject = companyProject;
 	}
 	@Override
 	public int hashCode() {
@@ -57,7 +57,7 @@ public class Proyect {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Proyect other = (Proyect) obj;
+		Project other = (Project) obj;
 		return Objects.equals(budget, other.budget) && id == other.id && Objects.equals(name, other.name);
 	}
 	

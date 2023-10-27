@@ -12,5 +12,7 @@
   <property name="hibernate.format_sql">true</property>
   <mapping class="com.jacaranda.model.Company"/>
   <mapping class="com.jacaranda.model.Employee"/>
+  <mapping class="com.jacaranda.model.Project"/>
+  <mapping class="com.jacaranda.model.CompanyProject"/>
  </session-factory>
 </hibernate-configuration>
