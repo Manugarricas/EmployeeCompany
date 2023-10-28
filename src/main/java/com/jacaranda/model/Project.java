@@ -9,46 +9,54 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="project")
+@Table(name = "project")
 public class Project {
-	
+
 	@Id
 	private int id;
 	private String name;
-	private String budget;
-	
-	@OneToMany(mappedBy="project")
+	private String butget;
+
+	@OneToMany(mappedBy = "project")
 	List<CompanyProject> companyProject;
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBudget() {
-		return budget;
+
+	public String getButget() {
+		return butget;
 	}
-	public void setBudget(String budget) {
-		this.budget = budget;
+
+	public void setBudget(String butget) {
+		this.butget = butget;
 	}
-	
+
 	public List<CompanyProject> getCompanyProject() {
 		return companyProject;
 	}
+
 	public void setCompanyProject(List<CompanyProject> companyProject) {
 		this.companyProject = companyProject;
 	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(budget, id, name);
+		return Objects.hash(butget, id, name);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -58,9 +66,7 @@ public class Project {
 		if (getClass() != obj.getClass())
 			return false;
 		Project other = (Project) obj;
-		return Objects.equals(budget, other.budget) && id == other.id && Objects.equals(name, other.name);
+		return Objects.equals(butget, other.butget) && id == other.id && Objects.equals(name, other.name);
 	}
-	
-	
-	
+
 }

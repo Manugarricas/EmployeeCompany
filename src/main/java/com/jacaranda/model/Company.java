@@ -16,6 +16,7 @@ public class Company {
 	private String name;
 	private String address;
 	private String city;
+	
 	@OneToMany(mappedBy="company")
 	private List<Employee> EmployeeList;
 	
@@ -73,6 +74,15 @@ public class Company {
 	public void setEmployeeList(List<Employee> employeeList) {
 		EmployeeList = employeeList;
 	}
+	
+
+	public List<CompanyProject> getCompanyProject() {
+		return companyProject;
+	}
+
+	public void setCompanyProject(List<CompanyProject> companyProject) {
+		this.companyProject = companyProject;
+	}
 
 	@Override
 	public int hashCode() {
@@ -95,7 +105,5 @@ public class Company {
 	public String toString() {
 		return "Company [id=" + id + ", name=" + name + ", address=" + address + ", city=" + city + "]";
 	}
-	
-	
 	
 }
