@@ -4,6 +4,7 @@
     <%@ page import="com.jacaranda.model.Company" %>
     <%@ page import="com.jacaranda.model.Employee" %>
     <%@ page import="com.jacaranda.model.Project" %>
+    <%@ page import="com.jacaranda.model.CompanyProject" %>
     <%@ page import="com.jacaranda.repository.DbRepository" %>
     <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
@@ -60,7 +61,7 @@
     </tr>
     <%for (CompanyProject cp : c.getCompanyProject()) {%>
     <tr>
-    	<td colspan="3"><%=  %></td>
+    	<td colspan="3"><%= cp.getProject() %></td>
     </tr>
     <%} %>
     

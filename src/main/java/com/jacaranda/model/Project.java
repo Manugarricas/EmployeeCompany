@@ -69,4 +69,9 @@ public class Project {
 		return Objects.equals(butget, other.butget) && id == other.id && Objects.equals(name, other.name);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Name: %s, id: %s, budget: %s.", this.getName(), this.getId(), this.getButget());
+	}
+
 }
