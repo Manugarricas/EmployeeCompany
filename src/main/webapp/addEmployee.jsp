@@ -1,7 +1,14 @@
+<%@page import="java.time.ZoneId"%>
 <%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 	<%@ page import="java.time.LocalDate" %>
+	<%@ page import="java.util.Date" %>
+	<%@ page import="java.text.SimpleDateFormat" %>
+	<%@ page import="com.jacaranda.model.Employee" %>
+	<%@ page import="com.jacaranda.repository.DbRepository" %>
+	<%@ page import="com.jacaranda.model.Company" %>
+	<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +21,33 @@
 	
 	<%
 	LocalDate today = LocalDate.now();
+	int idCompany = -1;
+	String id = request.getParameter("id");
+	String firstName = request.getParameter("firstName");
+	String lastName = request.getParameter("lastName");
+	String email = request.getParameter("email");
+	String gender = request.getParameter("gender");
+	String dateOfBirth = request.getParameter("birth");
+	String company = request.getParameter("company");
+	String button = request.getParameter("submit");
 	
-	
+	if (button != null) {
+		try {
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			Date dateOfBirthParsed = format.parse(dateOfBirth);
+			ArrayList<Company> companies = (ArrayList<Company>)DbRepository.findAll(Company.class);
+			for (Company c : companies) {
+				if (c.getName().equals(company)) {
+					idCompany = c.getId();
+				}
+			}
+			Company companyEmployee = DbRepository.find(Company.class, idCompany);
+			Employee e = new Employee(Integer.parseInt(id), firstName, lastName, email, gender, dateOfBirthParsed, companyEmployee);
+			
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+	}
 	
 	%>
 	
@@ -61,14 +93,14 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="company" class="col-4 col-form-label">Company</label> 
+    <label for="company" class="col-4 col-form-label">Company name</label> 
     <div class="col-8">
       <input id="company" name="company" type="text" class="form-control" required="required">
     </div>
   </div>
   <div class="form-group row">
     <div class="offset-4 col-8">
-      <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+      <button name="submit" type="submit" class="btn btn-primary" value="submit">Submit</button>
     </div>
   </div>
 </form>

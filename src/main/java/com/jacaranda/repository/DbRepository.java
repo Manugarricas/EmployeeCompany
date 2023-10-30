@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.jacaranda.model.Employee;
 import com.jacaranda.util.DbUtil;
 
 public class DbRepository {
@@ -46,24 +47,43 @@ public class DbRepository {
 		return resultList;
 	}
 	
-	public static <E> E addToBd(Class<E> c) throws Exception {
+//	public static <E> E addToBd(Class<E> c) throws Exception {
+//		Transaction transaction = null;
+//		Session session;
+//		E result;
+//		try {
+//			session = DbUtil.getSessionFactory().openSession();
+//			transaction = session.beginTransaction();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			throw new Exception("Error en la base de datos.");
+//		}
+//		try {
+//			session.merge(result);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			throw new Exception("Error al obtener la entidad");
+//		}
+//		return result;
+//	}
+	
+	public static void addEmployee(Employee e) {
 		Transaction transaction = null;
-		Session session;
-		E result;
+		Session session = null;
 		try {
 			session = DbUtil.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception("Error en la base de datos.");
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			System.out.println("Error en la base de datos.");
 		}
 		try {
-			session.merge(result);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception("Error al obtener la entidad");
+			session.merge(e);
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			System.out.println("Eror al introducir el dato.");
 		}
-		return result;
+		session.close();
 	}
 	
 }
