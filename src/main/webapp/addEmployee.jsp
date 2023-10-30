@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 	<%@ page import="java.time.LocalDate" %>
-	<%@ page import="java.util.Date" %>
 	<%@ page import="java.text.SimpleDateFormat" %>
 	<%@ page import="com.jacaranda.model.Employee" %>
 	<%@ page import="com.jacaranda.repository.DbRepository" %>
@@ -20,6 +19,11 @@
 <body>
 	
 	<%
+	//Imports eliminados para que no colisionen
+	//	page import="java.sql.Date"
+	//  page import="java.util.Date" 
+	String mensaje = "";
+	
 	LocalDate today = LocalDate.now();
 	int idCompany = -1;
 	String id = request.getParameter("id");
@@ -33,8 +37,9 @@
 	
 	if (button != null) {
 		try {
-			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-			Date dateOfBirthParsed = format.parse(dateOfBirth);
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date parsed = format.parse(dateOfBirth);//TODO
+			java.sql.Date dateOfBirthParsed = new java.sql.Date(parsed.getTime());
 			ArrayList<Company> companies = (ArrayList<Company>)DbRepository.findAll(Company.class);
 			for (Company c : companies) {
 				if (c.getName().equals(company)) {
@@ -43,9 +48,11 @@
 			}
 			Company companyEmployee = DbRepository.find(Company.class, idCompany);
 			Employee e = new Employee(Integer.parseInt(id), firstName, lastName, email, gender, dateOfBirthParsed, companyEmployee);
-			
+			DbRepository.addEmployee(e);
+			mensaje = "The employee has been added succesfully.";
 		} catch (Exception exception) {
 			exception.printStackTrace();
+			mensaje = "Fatal error. The employee can't be added to database.";
 		}
 	}
 	
@@ -104,5 +111,6 @@
     </div>
   </div>
 </form>
+<p><%= mensaje %></p>
 </body>
 </html>

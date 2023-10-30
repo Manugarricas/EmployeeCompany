@@ -79,6 +79,7 @@ public class DbRepository {
 		}
 		try {
 			session.merge(e);
+			transaction.commit();
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			System.out.println("Eror al introducir el dato.");
