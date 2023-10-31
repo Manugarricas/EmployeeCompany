@@ -50,9 +50,14 @@
     </tr>
     
     <%for (Employee e : c.getEmployeeList()) {%>
-    <tr>
-    	<td colspan="3"><%= e.getFirstName() + " " + e.getLastName() %></td>
-    </tr>
+    <form action="updateEmployee.jsp" method="get">
+		<tr>
+		<input value='<%= e.getId() %>' name="idEmployee" hidden>
+			<td colspan="3"><%= e.getFirstName() + " " + e.getLastName() %>
+		    	<button class="btn btn-primary">Edit</button>
+		    </td>
+		</tr>
+	</form>
     <%} %>
     <tr>
     	<th colspan="3">Projects</th>

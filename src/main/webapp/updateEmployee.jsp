@@ -1,56 +1,49 @@
-<%@page import="java.time.ZoneId"%>
-<%@page import="org.hibernate.internal.build.AllowSysOut"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-	<%@ page import="java.time.LocalDate" %>
-	<%@ page import="java.text.SimpleDateFormat" %>
-	<%@ page import="com.jacaranda.model.Employee" %>
-	<%@ page import="com.jacaranda.repository.DbRepository" %>
-	<%@ page import="com.jacaranda.model.Company" %>
-	<%@ page import="java.util.ArrayList" %>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.sql.Date"%>
+<%@page import="com.jacaranda.util.DbUtil"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page import="com.jacaranda.model.Employee" %>
+    <%@ page import="com.jacaranda.repository.DbRepository" %>
+    <%@ page import="java.util.ArrayList" %>
+    <%@ page import="com.jacaranda.model.Company" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Add employee</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta charset="UTF-8">
+	<title>Update employee</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	
 	<%
-	//Imports eliminados para que no colisionen
-	//	page import="java.sql.Date"
-	//  page import="java.util.Date" 
-	String message = "";
-	LocalDate today = LocalDate.now();
-	int idCompany = -1;
-	String firstName = request.getParameter("firstName");
-	String lastName = request.getParameter("lastName");
-	String email = request.getParameter("email");
-	String gender = request.getParameter("gender");
-	String dateOfBirth = request.getParameter("birth");
-	String company = request.getParameter("company");
+	
+	String id = request.getParameter("idEmployee");
 	String button = request.getParameter("submit");
+	java.time.LocalDate today = LocalDate.now();
+	String message = "";
 	
 	if (button != null) {
 		try {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			java.util.Date parsed = format.parse(dateOfBirth);
-			java.sql.Date dateOfBirthParsed = new java.sql.Date(parsed.getTime());
-			Company companyEmployee = DbRepository.find(Company.class, Integer.parseInt(company));
-			Employee e = new Employee(firstName, lastName, email, gender, dateOfBirthParsed, companyEmployee);
+			Employee e = DbRepository.find(Employee.class, Integer.parseInt(id));
 			DbRepository.addEmployee(e);
-			message = "The employee has been added succesfully.";
-		} catch (Exception exception) {
-			exception.printStackTrace();
-			message = "Fatal error. The employee can't be added to database.";
+			message = "Employee edited succesfully.";
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = "Fail while editing the employee.";
 		}
 	}
 	
 	%>
 	
-<form method="post" action="./addEmployee.jsp">
+<form method="get" action="./updateEmployee.jsp">
+  <div class="form-group row">
+    <label for="id" class="col-4 col-form-label">ID</label> 
+    <div class="col-8">
+      <input id="id" name="id" type="text" class="form-control" readonly>
+    </div>
+  </div>
   <div class="form-group row">
     <label for="firstName" class="col-4 col-form-label">First name</label> 
     <div class="col-8">
