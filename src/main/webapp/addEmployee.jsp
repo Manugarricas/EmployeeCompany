@@ -26,7 +26,6 @@
 	
 	LocalDate today = LocalDate.now();
 	int idCompany = -1;
-	String id = request.getParameter("id");
 	String firstName = request.getParameter("firstName");
 	String lastName = request.getParameter("lastName");
 	String email = request.getParameter("email");
@@ -38,16 +37,10 @@
 	if (button != null) {
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			java.util.Date parsed = format.parse(dateOfBirth);//TODO
+			java.util.Date parsed = format.parse(dateOfBirth);
 			java.sql.Date dateOfBirthParsed = new java.sql.Date(parsed.getTime());
-			ArrayList<Company> companies = (ArrayList<Company>)DbRepository.findAll(Company.class);
-			for (Company c : companies) {
-				if (c.getName().equals(company)) {
-					idCompany = c.getId();
-				}
-			}
-			Company companyEmployee = DbRepository.find(Company.class, idCompany);
-			Employee e = new Employee(Integer.parseInt(id), firstName, lastName, email, gender, dateOfBirthParsed, companyEmployee);
+			Company companyEmployee = DbRepository.find(Company.class, Integer.parseInt(company));
+			Employee e = new Employee(firstName, lastName, email, gender, dateOfBirthParsed, companyEmployee);
 			DbRepository.addEmployee(e);
 			mensaje = "The employee has been added succesfully.";
 		} catch (Exception exception) {
@@ -59,12 +52,6 @@
 	%>
 	
 <form method="get" action="./addEmployee.jsp">
-  <div class="form-group row">
-    <label for="id" class="col-4 col-form-label">ID</label> 
-    <div class="col-8">
-      <input id="id" name="id" type="text" required="required" class="form-control">
-    </div>
-  </div>
   <div class="form-group row">
     <label for="firstName" class="col-4 col-form-label">First name</label> 
     <div class="col-8">
@@ -100,11 +87,20 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="company" class="col-4 col-form-label">Company name</label> 
+    <label for="select" class="col-4 col-form-label">Company</label> 
     <div class="col-8">
-      <input id="company" name="company" type="text" class="form-control" required="required">
-    </div>
-  </div>
+   <select class="custom-select" name="company">
+   <%
+   ArrayList<Company> companies = (ArrayList<Company>)DbRepository.findAll(Company.class);
+	for (Company c : companies) {
+		%>
+		<option value='<%= c.getId() %>'><%= c.getName() %></option>
+		<%
+	}
+	%>
+	</select>
+	</div>
+	</div>
   <div class="form-group row">
     <div class="offset-4 col-8">
       <button name="submit" type="submit" class="btn btn-primary" value="submit">Submit</button>

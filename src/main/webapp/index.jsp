@@ -22,11 +22,9 @@
 	
 	ArrayList<Company> companyResult = new ArrayList(0);
 	ArrayList<Employee> employeeResult = new ArrayList(0);
-	ArrayList<Project> projectResult = new ArrayList(0);
 	try {
 		companyResult = (ArrayList<Company>)DbRepository.findAll(Company.class);
 		employeeResult = (ArrayList<Employee>)DbRepository.findAll(Employee.class);
-		projectResult = (ArrayList<Project>)DbRepository.findAll(Project.class);
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
