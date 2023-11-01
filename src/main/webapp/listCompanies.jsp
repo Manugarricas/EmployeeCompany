@@ -50,14 +50,26 @@
     </tr>
     
     <%for (Employee e : c.getEmployeeList()) {%>
-    <form action="updateEmployee.jsp" method="get">
 		<tr>
-		<input value='<%= e.getId() %>' name="idEmployee" hidden>
-			<td colspan="3"><%= e.getFirstName() + " " + e.getLastName() %>
+		    <form action="./updateEmployee.jsp" method="get">
+			<input value='<%= e.getId() %>' name="idEmployee" hidden>
+			<input value='<%= e.getFirstName() %>' name="firstName" hidden>
+			<input value='<%= e.getLastName() %>' name="lastName" hidden>
+			<input value='<%= e.getEmail() %>' name="email" hidden>
+			<input value='<%= e.getGender() %>' name="gender" hidden>
+			<input value='<%= e.getDateOfBirth() %>' name="dateOfBirth" hidden>
+			<input value='<%= e.getCompany() %>' name="company" hidden>
+			<td colspan="1"><%= e.getFirstName() + " " + e.getLastName() %>
 		    	<button class="btn btn-primary">Edit</button>
 		    </td>
+		    </form>
+		    <form action="./deleteEmployee.jsp" method="get">
+			<input value='<%= e.getId() %>' name="idEmployee" hidden>
+			<td colspan="2">
+		    	<button class="btn btn-primary">Delete</button>
+		    </td>
+		    </form>
 		</tr>
-	</form>
     <%} %>
     <tr>
     	<th colspan="3">Projects</th>

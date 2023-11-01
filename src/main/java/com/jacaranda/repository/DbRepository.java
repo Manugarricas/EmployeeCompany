@@ -87,4 +87,24 @@ public class DbRepository {
 		session.close();
 	}
 	
+	public static void deleteEmployee(Employee e) {
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = DbUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			System.out.println("Error en la base de datos.");
+		}
+		try {
+			session.remove(e);
+			transaction.commit();
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			System.out.println("Eror al introducir el dato.");
+		}
+		session.close();
+	}
+	
 }

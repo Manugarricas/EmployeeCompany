@@ -7,7 +7,6 @@
     <%@ page import="com.jacaranda.repository.DbRepository" %>
     <%@ page import="java.util.ArrayList" %>
     <%@ page import="com.jacaranda.model.Company" %>
-    <%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,35 +18,23 @@
 <body>
 	
 	<%
-	java.sql.Date dateOfBirthParsed = null;
-	String id = request.getParameter("idEmployee");
-	String firstName = request.getParameter("firstName");
-	String lastName = request.getParameter("lastName");
-	String email = request.getParameter("email");
-	String gender = request.getParameter("gender");
-	String dateOfBirth = request.getParameter("dateOfBirth");
-	try {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		java.util.Date parsed = format.parse(dateOfBirth);
-		dateOfBirthParsed = new java.sql.Date(parsed.getTime());
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	String company = request.getParameter("company");
 	
+	String id = request.getParameter("idEmployee");
 	String button = request.getParameter("submit");
 	java.time.LocalDate today = LocalDate.now();
 	String message = "";
 	
 	if (button != null) {
 		try {
-			Company companyEmployee = DbRepository.find(Company.class, Integer.parseInt(company));
-			Employee e = new Employee(Integer.parseInt(id), firstName, lastName, email, gender, dateOfBirthParsed, companyEmployee);
-			DbRepository.addEmployee(e);
-			message = "Employee edited succesfully.";
+			Employee e = DbRepository.find(Employee.class, Integer.parseInt(id));
+			DbRepository.deleteEmployee(e);
+			message = "Employee deleted succesfully.";
+			%>
+			<a href="./listCompanies.jsp"><button class="btn btn-primary">Volver a la lista</button></a>
+			<%
 		} catch (Exception e) {
 			e.printStackTrace();
-			message = "Fail while editing the employee.";
+			message = "Fail while deleting the employee.";
 		}
 	}
 	
@@ -63,19 +50,19 @@
   <div class="form-group row">
     <label for="firstName" class="col-4 col-form-label">First name</label> 
     <div class="col-8">
-      <input id="firstName" value='<%= firstName %>' name="firstName" type="text" class="form-control" required="required">
+      <input id="firstName" value='<% //TODO %>' name="firstName" type="text" class="form-control" required="required">
     </div>
   </div>
   <div class="form-group row">
     <label for="lastName" class="col-4 col-form-label">Last name</label> 
     <div class="col-8">
-      <input id="lastName" value='<%= lastName %>' name="lastName" type="text" class="form-control" required="required">
+      <input id="lastName" name="lastName" type="text" class="form-control" required="required">
     </div>
   </div>
   <div class="form-group row">
     <label for="email" class="col-4 col-form-label">Email</label> 
     <div class="col-8">
-      <input id="email" value='<%= email %>' name="email" type="email" class="form-control" required="required">
+      <input id="email" name="email" type="email" class="form-control" required="required">
     </div>
   </div>
   <div class="form-group row">
@@ -116,6 +103,5 @@
   </div>
 </form>
 <p><%= message %></p>
-<a href="./listCompanies.jsp"><button class="btn btn-primary">Volver a la lista</button></a>
 </body>
 </html>
