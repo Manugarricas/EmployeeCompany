@@ -20,6 +20,46 @@ public class Project {
 	@OneToMany(mappedBy = "project")
 	List<CompanyProject> companyProject;
 	
+	// Constructor sin argumentos (constructor predeterminado)
+    public Project() {
+    }
+
+    // Constructor con argumentos que inicializa todos los campos de la clase
+    public Project(int id, String name, String budget, List<CompanyProject> companyProject) {
+        this.id = id;
+        this.name = name;
+        this.butget = budget;
+        this.companyProject = companyProject;
+    }
+
+    // Constructor sin el campo "id"
+    public Project(String name, String budget, List<CompanyProject> companyProject) {
+        this.name = name;
+        this.butget = budget;
+        this.companyProject = companyProject;
+    }
+
+    // Constructor sin el campo "companyProject"
+    public Project(int id, String name, String budget) {
+        this.id = id;
+        this.name = name;
+        this.butget = budget;
+    }
+
+    // Constructor sin los campos "id" y "companyProject"
+    public Project(String name, String budget) {
+        this.name = name;
+        this.butget = budget;
+    }
+
+    // Constructor copia
+    public Project(Project other) {
+        this.id = other.id;
+        this.name = other.name;
+        this.butget = other.butget;
+        this.companyProject = other.companyProject;
+    }
+	
 	public int getId() {
 		return id;
 	}
