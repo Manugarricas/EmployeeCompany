@@ -17,6 +17,12 @@ public class Project {
 	private String name;
 	private String butget;
 
+	public Project(String name, String butget) {
+		super();
+		this.name = name;
+		this.butget = butget;
+	}
+
 	@OneToMany(mappedBy = "project")
 	List<CompanyProject> companyProject;
 

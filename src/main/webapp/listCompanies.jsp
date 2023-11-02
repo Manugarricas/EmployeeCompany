@@ -12,7 +12,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Companies</title>
-<link rel="stylesheet" href="./indexStyle.css" type="text/css">
+<link rel="stylesheet" href="./listCompaniesStyle.css" type="text/css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>

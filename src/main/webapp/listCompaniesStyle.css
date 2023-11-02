@@ -1,0 +1,10 @@
+@charset "ISO-8859-1";
+
+.spacer {
+	height: 50px;
+	background-color: #adadad;
+}
+
+button {
+	margin-left: 50px;
+}
