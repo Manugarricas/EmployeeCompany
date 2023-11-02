@@ -34,6 +34,14 @@ public class CompanyProject {
 		this.project = project;
 	}
 	
+	public CompanyProject(Company company, Project project, Date begin, Date end) {
+		super();
+		this.company = company;
+		this.project = project;
+		this.begin = begin;
+		this.end = end;
+	}
+
 	public CompanyProject() {
 		super();
 	}

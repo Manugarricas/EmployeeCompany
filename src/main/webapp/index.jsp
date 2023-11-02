@@ -11,14 +11,18 @@
 <body>
 
 	<%
-	
+	String message = "";
 	String button = request.getParameter("submit");
 	String username = request.getParameter("user");
 	String password = request.getParameter("password");
 	
 	if (button != null && username != null && password != null) { {
 		try {
-			User user = DbRepository.find(User.class, username);			
+			User user = DbRepository.find(User.class, username);
+			message = "!Usuario encontrado!";
+			%>
+			<p><%= message %></p>
+			<%
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("./error.jsp?msg=Error");

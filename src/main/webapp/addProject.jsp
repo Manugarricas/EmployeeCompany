@@ -20,7 +20,7 @@
 	
 	if (button != null) {
 		try {
-			Project project = new Project(name, budget);
+			Project project = new Project(name, budget);//TODO si no tiene constructor no me deja crear uno asi y si lo creo me da problemas en el addCompanyProject.jsp
 		} catch (Exception e) {
 			e.printStackTrace();
 			message = "A fail occurred while trying to add the project.";

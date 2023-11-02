@@ -1,9 +1,12 @@
+<%@page import="java.util.Date"%>
 <%@page import="com.jacaranda.repository.DbRepository"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="com.jacaranda.model.CompanyProject" %>
     <%@ page import="com.jacaranda.model.Company" %>
     <%@ page import="com.jacaranda.model.Project" %>
+    <%@ page import="java.text.SimpleDateFormat" %>
+    <%@ page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +26,14 @@
 	
 	if (button != null) {
 		try {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date beginFormated = format.parse(begin);
+			java.util.Date endFormated = format.parse(end);
+			java.sql.Date beginParsed = new java.sql.Date(beginFormated.getTime());
+			java.sql.Date endParsed = new java.sql.Date(endFormated.getTime());
 			Company company = DbRepository.find(Company.class, Integer.parseInt(idCompany));
 			Project project = DbRepository.find(Project.class, Integer.parseInt(idProject));
-			CompanyProject cp = new CompanyProject(company, project, begin, end);//TODO arreglar fechas
+			CompanyProject cp = new CompanyProject(company, project, beginParsed, endParsed);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
