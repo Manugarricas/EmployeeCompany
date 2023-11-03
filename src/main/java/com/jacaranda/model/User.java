@@ -16,9 +16,9 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	@Column(name = "role")
-	private Role role;
+	private String role;
 	
-	public User(String user, String password, Role role) {
+	public User(String user, String password, String role) {
 		super();
 		this.user = user;
 		this.password = password;
@@ -45,11 +45,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Role getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

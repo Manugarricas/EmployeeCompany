@@ -11,24 +11,37 @@
 <body>
 
 	<%
+	
+	String role;
 	String message = "";
 	String button = request.getParameter("submit");
 	String username = request.getParameter("user");
 	String password = request.getParameter("password");
 	
-	if (button != null && username != null && password != null) { {
+	if (button != null && username != null && password != null) { 
 		try {
 			User user = DbRepository.find(User.class, username);
-			message = "!Usuario encontrado!";
-			%>
-			<p><%= message %></p>
-			<%
+			
+			if (user.getPassword().equals(password)) {//si introduce bien la contraseña
+				
+				if (session.getAttribute("role") == null) {//si no existe la variable de session, se le da un valor.
+					session.setAttribute("role", user.getRole());
+				}
+				else {//si ya existe, recuperamos el valor
+					session.getAttribute("role");
+				}
+				
+				response.sendRedirect("./listCompanies.jsp?" + session.getAttribute("role"));
+			
+			}
+			else {//si introduce mal la contraseña
+				message = "Usuario o contraseñas invalidos pesao.";
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("./error.jsp?msg=Error");
 		}
-		
-	}
 		
 	}
 	
@@ -49,6 +62,7 @@
 	            <button type="submit" name="submit">Log in</button>
 	        </div>
         </form>
-    </section>
+    </section> <br>
+    <p style="color: black;"><%= message %></p>
 </body>
 </html>
