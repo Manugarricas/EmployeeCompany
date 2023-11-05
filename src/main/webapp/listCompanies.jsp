@@ -110,7 +110,7 @@
     			<% } %>
     		</td>
     	</form>
-    	<form action="./deleteCompanyProject.jsp" method="post">
+    	<form action="./deleteProject.jsp" method="post">
     		<input value='<%= cp.getCompany() %>' name="cpCompany" hidden>
     		<input value='<%= cp.getProject() %>' name="cpProject" hidden>
     		<input value='<%= cp.getBegin() %>' name="cpBegin" hidden>

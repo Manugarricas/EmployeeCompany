@@ -7,6 +7,7 @@
     <%@ page import="com.jacaranda.model.Project" %>
     <%@ page import="java.text.SimpleDateFormat" %>
     <%@ page import="java.time.LocalDate" %>
+    <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 	<%
 	
 	String message = "";
-	String idCompany = request.getParameter("idCompany");
+	String idCompany = request.getParameter("company");
 	String idProject = request.getParameter("idProject");
 	String begin = request.getParameter("begin");
 	String end = request.getParameter("end");
@@ -45,6 +46,12 @@
   <div class="form-group row">
     <label for="idCompany" class="col-4 col-form-label">ID Company</label> 
     <div class="col-8">
+    <select class="custom-select" name="company">
+    	<% ArrayList<Company> companies = null; %>
+    	<% for (Company c : companies) { %>
+    		<option value='<%= c.getId() %>'><%= c.getName() %></option>
+    	<% } %>
+    </select>
       <input id="idCompany" name="idCompany" type="text" required="required" class="form-control">
     </div>
   </div>

@@ -1,6 +1,9 @@
+<%@page import="com.jacaranda.repository.DbRepository"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="com.jacaranda.model.Project" %>
+    <%@ page import="com.jacaranda.model.CompanyProject" %>
+    <%@ page import="com.jacaranda.model.Company" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,14 +17,17 @@
 	<%
 	
 	String button = request.getParameter("submit");
-	String id = request.getParameter("id");
-	String name = request.getParameter("name");
-	String budget = request.getParameter("budget");
+	String cpCompany = request.getParameter("cpCompany");
+	String cpProject = request.getParameter("cpProject");
+	String cpBegin = request.getParameter("cpBegin");
+	String cpEnd = request.getParameter("cpEnd");
 	String message = "";
 	
 	if (button != null) {
 		try {
-			Project p = new Project();
+			Project p = DbRepository.find(Project.class, Integer.parseInt(cpProject));
+			Company c = DbRepository.find(Company.class, Integer.parseInt(cpCompany));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			message = "A fail occurred while updating the project";
@@ -34,7 +40,7 @@
   <div class="form-group row">
     <label for="id" class="col-3 col-form-label">ID</label> 
     <div class="col-9">
-      <input id="id" name="id" type="number" required="required" class="form-control">
+      <input id="id" name="id" type="number" required="required" class="form-control" readonly>
     </div>
   </div>
   <div class="form-group row">
@@ -55,5 +61,6 @@
     </div>
   </div>
 </form>
+<a href="./updateCompanyProject.jsp"><button>Back to list</button></a>
 </body>
 </html>
