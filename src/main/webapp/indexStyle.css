@@ -61,3 +61,7 @@ button:hover {
 input {
     color: black;
 }
+
+#message {
+	color: black;
+}

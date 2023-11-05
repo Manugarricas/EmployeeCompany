@@ -19,7 +19,13 @@
 <body>
 	
 	<%
+	
+	if (session.getAttribute("role") == null) {
+		response.sendRedirect("./index.jsp?message=Logueate antes anda.");
+	}
+	
 	java.sql.Date dateOfBirthParsed = null;
+	java.sql.Date dateOfBirthParsedForInputValue = null;
 	String id = request.getParameter("idEmployee");
 	String firstName = request.getParameter("firstName");
 	String lastName = request.getParameter("lastName");
@@ -28,8 +34,11 @@
 	String dateOfBirth = request.getParameter("dateOfBirth");
 	try {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatForInputValue = new SimpleDateFormat("dd-MM-aaaa");
 		java.util.Date parsed = format.parse(dateOfBirth);
+		java.util.Date parsedForInputValue = format.parse(dateOfBirth);
 		dateOfBirthParsed = new java.sql.Date(parsed.getTime());
+		dateOfBirthParsedForInputValue = new java.sql.Date(parsed.getTime());
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
@@ -91,7 +100,7 @@
   <div class="form-group row">
     <label for="birth" class="col-4 col-form-label">Date of birth</label> 
     <div class="col-8">
-      <input id="birth" name="birth" type="date" class="form-control" required="required" max='<%= today %>'>
+      <input id="birth" value='<%= dateOfBirthParsedForInputValue %>' name="birth" type="date" class="form-control" required="required" max='<%= today %>'>
     </div>
   </div>
   <div class="form-group row">
@@ -111,7 +120,7 @@
 	</div>
   <div class="form-group row">
     <div class="offset-4 col-8">
-      <button name="submit" type="submit" class="btn btn-primary" value="submit">Submit</button>
+      <button name="submit" type="submit" class="btn btn-primary" value="submit">Update</button>
     </div>
   </div>
 </form>

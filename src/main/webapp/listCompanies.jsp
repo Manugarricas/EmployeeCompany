@@ -29,6 +29,10 @@
 		e.printStackTrace();
 	}
 	
+	if (session.getAttribute("role") == null) {
+		response.sendRedirect("./index.jsp?message=Logueate antes anda.");
+	}
+	
 	%>
 <table class="table">
   <thead class="thead-dark">
@@ -58,25 +62,67 @@
 			<input value='<%= e.getEmail() %>' name="email" hidden>
 			<input value='<%= e.getGender() %>' name="gender" hidden>
 			<input value='<%= e.getDateOfBirth() %>' name="dateOfBirth" hidden>
-			<input value='<%= e.getCompany() %>' name="company" hidden>
-			<td colspan="1"><%= e.getFirstName() + " " + e.getLastName() %>
+			<input value='<%= e.getCompany() %>' name="company" hidden>			
+			<td colspan="1"><%= e.getFirstName() + " " + e.getLastName() %><!-- Esto es el nombre -->
+			<% if (session.getAttribute("role") != null) {
+				if (session.getAttribute("role").equals("ADMIN")) { %>
 		    	<button class="btn btn-primary">Edit</button>
+		    <% 	}
+    		   }
+			%>
 		    </td>
 		    </form>
 		    <form action="./deleteEmployee.jsp" method="get">
 			<input value='<%= e.getId() %>' name="idEmployee" hidden>
+			<input value='<%= e.getFirstName() %>' name="firstName" hidden>
+			<input value='<%= e.getLastName() %>' name="lastName" hidden>
+			<input value='<%= e.getEmail() %>' name="email" hidden>
+			<input value='<%= e.getGender() %>' name="gender" hidden>
+			<input value='<%= e.getDateOfBirth() %>' name="dateOfBirth" hidden>
+			<input value='<%= e.getCompany() %>' name="company" hidden>
 			<td colspan="2">
+			<% if (session.getAttribute("role") != null) {
+				if (session.getAttribute("role").equals("ADMIN")) { %>
 		    	<button class="btn btn-primary">Delete</button>
+		    <% 	}
+    		   }
+			%>
 		    </td>
 		    </form>
+		    <% } %>
 		</tr>
-    <%} %>
     <tr>
     	<th colspan="3">Projects</th>
     </tr>
     <%for (CompanyProject cp : c.getCompanyProject()) {%>
     <tr>
-    	<td colspan="3"><%= cp.getProject() %></td>
+    	<td><%= cp.getProject() %></td>
+    	<form action="./updateCompanyProject.jsp" method="post">
+    		<input value='<%= cp.getCompany() %>' name="cpCompany" hidden>
+    		<input value='<%= cp.getProject() %>' name="cpProject" hidden>
+    		<input value='<%= cp.getBegin() %>' name="cpBegin" hidden>
+    		<input value='<%= cp.getEnd() %>' name="cpEnd" hidden>
+    		<td colspan="2">
+    			<% if (session.getAttribute("role") != null) { %>
+    				<% if (session.getAttribute("role").equals("ADMIN")) { %>
+    					<button class="btn btn-primary">Edit</button>
+    				<% } %>
+    			<% } %>
+    		</td>
+    	</form>
+    	<form action="./deleteCompanyProject.jsp" method="post">
+    		<input value='<%= cp.getCompany() %>' name="cpCompany" hidden>
+    		<input value='<%= cp.getProject() %>' name="cpProject" hidden>
+    		<input value='<%= cp.getBegin() %>' name="cpBegin" hidden>
+    		<input value='<%= cp.getEnd() %>' name="cpEnd" hidden>
+    		<td colspan="2">
+    			<% if (session.getAttribute("role") != null) { %>
+    				<% if (session.getAttribute("role").equals("ADMIN")) { %>
+    					<button class="btn btn-primary">Delete</button>
+    				<% } %>
+    			<% } %>
+    		</td>
+    	</form>
     </tr>
     <%} %>
     

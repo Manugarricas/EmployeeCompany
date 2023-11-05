@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.jacaranda.model.CompanyProject;
 import com.jacaranda.model.Employee;
 import com.jacaranda.util.DbUtil;
 
@@ -145,6 +146,46 @@ public class DbRepository {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			System.out.println("Eror al introducir el dato.");
+		}
+		session.close();
+	}
+	
+	public static void addCompanyProject(CompanyProject cp) {
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = DbUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error al conectar con la base de datos");
+		}
+		try {
+			session.merge(cp);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error al introducir el dato.");
+		}
+		session.close();
+	}
+	
+	public static void deleteCompanyProject(CompanyProject cp) {
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = DbUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error en la base de datos.");
+		}
+		try {
+			session.remove(cp);
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error al introducir el dato.");
 		}
 		session.close();
 	}

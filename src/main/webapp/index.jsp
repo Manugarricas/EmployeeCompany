@@ -13,7 +13,7 @@
 	<%
 	
 	String role;
-	String message = "";
+	String message = request.getParameter("message");
 	String button = request.getParameter("submit");
 	String username = request.getParameter("user");
 	String password = request.getParameter("password");
@@ -61,8 +61,10 @@
 	            </div>
 	            <button type="submit" name="submit">Log in</button>
 	        </div>
-        </form>
-    </section> <br>
-    <p style="color: black;"><%= message %></p>
+        </form> <br> <br>
+        <%if (request.getParameter("message") != null) { %>
+    	<p id="message"><%= request.getParameter("message") %></p>
+    <% } %>
+    </section>
 </body>
 </html>
