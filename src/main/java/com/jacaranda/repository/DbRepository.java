@@ -162,7 +162,7 @@ public class DbRepository {
 			System.out.println("Error al conectar con la base de datos");
 		}
 		try {
-			session.merge(cp);
+			session.persist(cp);
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

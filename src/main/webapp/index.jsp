@@ -18,7 +18,7 @@
 	String username = request.getParameter("user");
 	String password = request.getParameter("password");
 	
-	if (button != null && username != null && password != null) { 
+	if (button != null && username != null && password != null) {
 		try {
 			User user = DbRepository.find(User.class, username);
 			
@@ -26,12 +26,14 @@
 				
 				if (session.getAttribute("role") == null) {//si no existe la variable de session, se le da un valor.
 					session.setAttribute("role", user.getRole());
+					session.setAttribute("user", user.getUser());
 				}
 				else {//si ya existe, recuperamos el valor
 					session.getAttribute("role");
+					session.getAttribute("user");
 				}
 				
-				response.sendRedirect("./listCompanies.jsp?" + session.getAttribute("role"));
+				response.sendRedirect("./listCompanies.jsp");
 			
 			}
 			else {//si introduce mal la contraseña
@@ -43,6 +45,9 @@
 			response.sendRedirect("./error.jsp?msg=Error");
 		}
 		
+	}
+	else {
+		message = "Ningún campo puede ser nulo.";
 	}
 	
 	%>

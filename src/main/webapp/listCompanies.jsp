@@ -29,7 +29,7 @@
 		e.printStackTrace();
 	}
 	
-	if (session.getAttribute("role") == null) {
+	if (session.getAttribute("role") == null || session.getAttribute("user") == null) {
 		response.sendRedirect("./index.jsp?message=Logueate antes anda.");
 	}
 	
