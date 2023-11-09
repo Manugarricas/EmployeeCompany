@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import com.jacaranda.model.CompanyProject;
 import com.jacaranda.model.Employee;
 import com.jacaranda.model.Project;
+import com.jacaranda.model.User;
 import com.jacaranda.util.DbUtil;
 
 public class DbRepository {
@@ -66,50 +67,6 @@ public class DbRepository {
 		}
 		return resultList;
 	}
-	
-//	public static <E> E add(Class<E> c, Object o) throws Exception {
-//		Transaction transaction = null;
-//		E result = null;
-//		Session session = null;
-//		try {
-//			session = DbUtil.getSessionFactory().openSession();
-//			transaction = session.beginTransaction();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new Exception("Error en la base de datos.");
-//		}
-//		try {
-//			session.persist(o);
-//			transaction.commit();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			transaction.rollback();
-//			throw new Exception("Error al obtener la entidad");
-//		}
-//		return result;
-//	}
-//	
-//	public static <E> E delete(Class<E> c) throws Exception {
-//		Transaction transaction = null;
-//		E result = null;
-//		Session session = null;
-//		try {
-//			session = DbUtil.getSessionFactory().openSession();
-//			transaction = session.beginTransaction();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new Exception("Error en la base de datos.");
-//		}
-//		try {
-//			session.persist(result);
-//			transaction.commit();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			transaction.rollback();
-//			throw new Exception("Error al obtener la entidad");
-//		}
-//		return result;
-//	}
 	
 	public static void addEmployee(Employee e) {
 		Transaction transaction = null;
@@ -226,6 +183,44 @@ public class DbRepository {
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Error al introducir el dato.");
+		}
+	}
+	
+	public static void updateEmployee(Employee e) {
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = DbUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			System.out.println("Error en la base de datos.");
+		}
+		try {
+			session.merge(e);
+			transaction.commit();
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			System.out.println("Error al introducir el dato.");
+		}
+	}
+	
+	public static void updateUser(User u) {
+		Transaction transaction = null;
+		Session session = null;
+		try {
+			session = DbUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			System.out.println("Error en la base de datos.");
+		}
+		try {
+			session.merge(u);
+			transaction.commit();
+		} catch (Exception exception) {
+			exception.printStackTrace();
 			System.out.println("Error al introducir el dato.");
 		}
 	}

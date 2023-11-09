@@ -17,6 +17,8 @@ public class User {
 	private String password;
 	@Column(name = "role")
 	private String role;
+	@Column(name="hoursWorked")
+	private int hoursWorked;
 	
 	public User(String user, String password, String role) {
 		super();
@@ -51,6 +53,18 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public int getHoursWorked() {
+		return hoursWorked;
+	}
+
+	public void setHoursWorked(int hoursWorked) {
+		this.hoursWorked = hoursWorked;
+	}
+	
+	public void addHoursWorked(int hoursWorked) {
+		this.hoursWorked += hoursWorked;
 	}
 
 	@Override

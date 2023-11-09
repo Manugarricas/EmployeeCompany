@@ -28,21 +28,15 @@
 	
 	if (session.getAttribute("role") == null || session.getAttribute("user") == null) {
 		response.sendRedirect("./index.jsp?message=Logueate antes anda.");
+		return;
 	}
 	else {
 		username = session.getAttribute("user").toString();
-	}
-	
-	try {
 		user = DbRepository.find(User.class, username);
-	} catch (Exception e) {
-		e.printStackTrace();
-		response.sendRedirect("./index.jsp?message=fatal error unexpected.");
 	}
 	
 	String message = "";
 	LocalDate today = LocalDate.now();
-	
 	
 	%>
 	
@@ -84,7 +78,7 @@
       <input value='true' name="working" hidden>
       <%}else { %>
       <button name="submit" type="submit" class="btn btn-primary">Dejar de chambear</button>
-      <input value='true' name="working" hidden>
+      <input value='false' name="working" hidden>
       <%} %>
     </div>
   </div>
