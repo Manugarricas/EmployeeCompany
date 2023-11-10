@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Chambea</title>
+<title>Work page</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -52,7 +52,7 @@
 	
 <form action="./chamba.jsp" method="post">
   <div class="form-group row">
-    <label for="project" class="col-4 col-form-label">Projecto: </label> 
+    <label for="project" class="col-4 col-form-label">Project: </label> 
     <div class="col-8">
       <select id="project" name="project" required="required" class="custom-select">
       <% ArrayList<Project> projects = null; 
@@ -60,7 +60,7 @@
     			projects = (ArrayList<Project>)DbRepository.findAll(Project.class);
     		} catch (Exception e) {
     			e.printStackTrace();
-    			response.sendRedirect("./error.jsp?msg=Error al coger las companias");
+    			response.sendRedirect("./error.jsp?msg=Error al recoger las companias");
     		}
     	%>
     	<% for (Project p : projects) { %>
@@ -70,13 +70,13 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="employee" class="col-4 col-form-label">Eres: </label> 
+    <label for="employee" class="col-4 col-form-label">You are: </label> 
     <div class="col-8">
       <input id="employee" value='<%= user.getUser() %>' name="employee" type="text" class="form-control" required="required" readonly>
     </div>
   </div>
   <div class="form-group row">
-    <label for="date" class="col-4 col-form-label">Fecha comienzo</label> 
+    <label for="date" class="col-4 col-form-label">Start date:</label> 
     <div class="col-8">
       <input id="date" name="date" type="text" class="form-control" required="required" value='<%= today %>' readonly>
     </div>
@@ -84,11 +84,11 @@
   <div class="form-group row">
     <div class="offset-4 col-8">
       <%if (!isWorking) { %>
-      <button name="submit" type="submit" class="btn btn-primary">Empezar a chambear</button>
-      <input value='true' name="working" hidden>
+      <button name="submit" type="submit" class="btn btn-primary">Start working</button>
+      <input value='true' name="working" hidden="hidden">
       <%}else { %>
-      <button name="submit" type="submit" class="btn btn-primary">Dejar de chambear</button>
-      <input value='false' name="working" hidden>
+      <button name="submit" type="submit" class="btn btn-primary">Stop working</button>
+      <input value='false' name="working" hidden="hidden">
       <%} %>
     </div>
   </div>
