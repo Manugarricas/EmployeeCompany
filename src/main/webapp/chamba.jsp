@@ -1,3 +1,4 @@
+<%@page import="com.jacaranda.util.Time"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="com.jacaranda.model.EmployeeProject" %>
@@ -37,6 +38,15 @@
 	
 	String message = "";
 	LocalDate today = LocalDate.now();
+	
+	if (isWorking) {
+		session.setAttribute("startTime", Time.horaActual());
+	}
+	else {
+		if (session.getAttribute("startTime") != null) {
+			Time.computarTiempoTrabajo(Integer.parseInt(session.getAttribute("startTime").toString()), user);
+		}
+	}
 	
 	%>
 	
