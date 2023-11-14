@@ -18,7 +18,11 @@
 <body>
 
 	<%
+	//si es empieza
 	
+	if (session.getAttribute("haTrabajado") != null) {
+		
+	}
 	User user = null;
 	String username = "";
 	boolean isWorking = false;
@@ -50,7 +54,7 @@
 	
 	%>
 	
-<form action="./chamba.jsp" method="post">
+<form action="./work.jsp" method="post">
   <div class="form-group row">
     <label for="project" class="col-4 col-form-label">Project: </label> 
     <div class="col-8">
