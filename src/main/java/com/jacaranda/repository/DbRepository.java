@@ -246,4 +246,24 @@ public class DbRepository {
 		session.close();	
 	}
 	
+	public static void updateEmployeeProject(EmployeeProject ep) {
+		Transaction transaction = null;
+		Session session = null;
+		try  {
+			session = DbUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error en la base de datos");
+		}
+		try {
+			session.merge(ep);
+			transaction.commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error al introducir el dato.");
+		}
+		session.close();	
+	}
+	
 }

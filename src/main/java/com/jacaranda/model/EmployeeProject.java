@@ -57,6 +57,9 @@ public class EmployeeProject {
 	public void setHours(double hours) {
 		this.hours = hours;
 	}
+	public void addHours(double hours) {
+		this.hours += hours;
+	}
 	
 	@Override
 	public int hashCode() {

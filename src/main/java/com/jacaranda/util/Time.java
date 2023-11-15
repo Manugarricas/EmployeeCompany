@@ -12,7 +12,7 @@ public class Time {
 		return (now.getHour()*3600)+(now.getMinute()*60)+(now.getSecond());
 	}
 	
-	public static void computarTiempoTrabajo(int tiempoInicial, User user) {
+	public static double computarTiempoTrabajo(int tiempoInicial, User user) {
 		int tiempoTotal = horaActual() - tiempoInicial;
 		try {
 			user.addHoursWorked(tiempoTotal);
@@ -21,6 +21,7 @@ public class Time {
 			user.addHoursWorked(-tiempoTotal);
 			e.printStackTrace();
 		}
+		return tiempoTotal;
 	}
 	
 }
