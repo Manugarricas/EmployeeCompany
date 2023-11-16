@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login page</title>
-    <link rel="stylesheet" href="./indexStyle.css" type="text/css">
+    <link rel="stylesheet" href="./style/indexStyle.css" type="text/css">
 </head>
 <body>
 
@@ -33,7 +33,7 @@
 					session.getAttribute("user");
 				}
 				
-				response.sendRedirect("./listCompanies.jsp");
+				response.sendRedirect("./companies/listCompanies.jsp");
 			
 			}
 			else {//si introduce mal la contraseña
@@ -42,7 +42,7 @@
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.sendRedirect("./error.jsp?msg=Error");
+			response.sendRedirect("./errors/error.jsp?msg=Error");
 		}
 		
 	}

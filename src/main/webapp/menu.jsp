@@ -4,8 +4,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
 	<div class="container-fluid">
-		<a class="navbar-brand" href="machineHistory.jsp">Historial de la máquina</a>
-		<a class="navbar-brand" href="playerHistory.jsp">Historial del jugador</a>
-		<a class="navbar-brand" href="play.jsp?new=">Empezar juego</a>	
+		<a class="navbar-brand" href="/companies/listCompanies.jsp">List companies</a>
+		<a class="navbar-brand" href="#">Add companies</a>
+		<a class="navbar-brand" href="/employee/listEmployee.jsp">List employees</a>
+		<a class="navbar-brand" href="/employee/addEmployee.jsp">Add  employees</a>
+		<a class="navbar-brand" href="/projects/listProjects.jsp">List projects</a>
+		<a class="navbar-brand" href="/projects/addProjects.jsp">Add projects</a>
 	</div>
 </nav>

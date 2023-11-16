@@ -17,7 +17,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#">List companies</a>
+		<a class="navbar-brand" href="#">Add companies</a>
+		<a class="navbar-brand" href="../employee/listEmployee.jsp">List employees</a>
+		<a class="navbar-brand" href="../employee/addEmployee.jsp">Add  employees</a>
+		<a class="navbar-brand" href="../projects/listProject.jsp">List projects</a>
+		<a class="navbar-brand" href="../projects/addProject.jsp">Add projects</a>
+	</div>
+</nav>
 	<%
 	
 	ArrayList<Company> companyResult = new ArrayList(0);
